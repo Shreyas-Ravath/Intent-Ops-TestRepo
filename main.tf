@@ -1,4 +1,4 @@
-﻿terraform {
+terraform {
   backend "s3" {
     bucket = "intentops-test-tfstate-365580293637"
     key    = "test/terraform.tfstate"
@@ -24,11 +24,11 @@ resource "aws_security_group" "test_sg" {
   description = "Test security group for IntentOps demo"
   
   ingress {
-    description = "SSH from anywhere"
+    description = "SSH from restricted ranges"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # VULNERABLE - triggers INTENT-NET-001
+    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12"]  # Modified by IntentOps to fix INTENT-NET-001
   }
   
   egress {
