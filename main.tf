@@ -1,4 +1,4 @@
-﻿terraform {
+terraform {
   backend "s3" {
     bucket = "intentops-test-tfstate-365580293637"
     key    = "test/terraform.tfstate"
@@ -28,14 +28,14 @@ resource "aws_security_group" "test_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # VULNERABLE - triggers INTENT-NET-001
+    cidr_blocks = []  # VULNERABLE - triggers INTENT-NET-001
   }
   
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = []
   }
   
   tags = {
