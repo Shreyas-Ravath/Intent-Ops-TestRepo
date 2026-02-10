@@ -96,11 +96,11 @@ resource "aws_security_group" "demo_escalate" {
 
   # VIOLATION: Unrestricted RDP access (less common, might be intentional)
   ingress {
-    description = "RDP from anywhere"
+    description = "RDP from trusted networks"
     from_port   = 3389
     to_port     = 3389
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12"] # Change made by IntentOps
   }
 
   # Multiple other ports that might be legitimate
