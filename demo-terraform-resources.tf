@@ -9,12 +9,13 @@ resource "aws_security_group" "demo_create_pr" {
   vpc_id      = var.vpc_id  # Replace with actual VPC ID
 
   # VIOLATION: Unrestricted SSH access from internet
+  # REMEDIATION: Restrict SSH access to trusted networks
   ingress {
-    description = "SSH from anywhere"
+    description = "SSH from trusted networks"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12"] # Change made by IntentOps
   }
 
   # Legitimate HTTPS access
