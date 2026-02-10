@@ -18,58 +18,6 @@ provider "aws" {
   }
 }
 
-# VULNERABLE: Security group with public ingress on port 22
-resource "aws_security_group" "test_sg" {
-  name        = "intentops-test-sg"
-  description = "Test security group for IntentOps demo"
-  
-  ingress {
-    description = "SSH from restricted ranges"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12"]  # Modified by IntentOps to fix INTENT-NET-001
-  }
-  
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  tags = {
-    Name = "intentops-test-sg"
-  }
-}
-#testdemo-2
-resource "aws_security_group" "test_sg2" {
-  name        = "intentops-test-sg-2"
-  description = "Test security group for IntentOps demo"
-  
-  ingress {
-    description = "SSH from restricted ranges"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Modified by IntentOps to fix INTENT-NET-001
-  }
-  
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  tags = {
-    Name = "intentops-test-sg2"
-  }
-}
-output "security_group_id" {
-  value = aws_security_group.test_sg.id
-}
-
-output "security_group_id-2" {
-  value = aws_security_group.test_sg2.id
+variable vpc_id {
+default = "vpc-0d2feda38007c22aa"
 }
