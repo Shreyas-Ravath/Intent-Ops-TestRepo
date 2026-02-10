@@ -8,13 +8,13 @@ resource "aws_security_group" "demo_create_pr" {
   description = "Demo SG that should trigger CREATE_PR decision"
   vpc_id      = var.vpc_id  # Replace with actual VPC ID
 
-  # VIOLATION: Unrestricted SSH access from internet
+  # VIOLATION FIXED BY INTENTOPS: Restricted SSH access to internal networks
   ingress {
-    description = "SSH from anywhere"
+    description = "SSH from internal networks"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12"]
   }
 
   # Legitimate HTTPS access
