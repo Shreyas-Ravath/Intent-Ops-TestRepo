@@ -44,7 +44,7 @@ resource "aws_security_group" "test_sg" {
 }
 #testdemo-2
 resource "aws_security_group" "test_sg2" {
-  name        = "intentops-test-sg"
+  name        = "intentops-test-sg-2"
   description = "Test security group for IntentOps demo"
   
   ingress {
