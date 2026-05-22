@@ -4,7 +4,7 @@ data "aws_ami" "latest_linux" {
 
   filter {
     name   = "name"
-    values = ["al2023-ami-2023.x-x86_64*"] # Amazon Linux 2023
+    values = ["al2023-ami-2025.x-x86_64*"] # Amazon Linux 2023
   }
 }
 
