@@ -1,17 +1,28 @@
-data "aws_ami" "latest_linux" {
+data "aws_ami" "amzlinux" {
   most_recent = true
-  owners      = ["amazon"]
-
+  owners = [ "amazon" ]
   filter {
-    name   = "name"
-    values = ["al2023-ami-2025.x-x86_64*"] # Amazon Linux 2023
+    name = "name"
+    values = [ "amzn2-ami-hvm-*-gp2" ]
+  }
+  filter {
+    name = "root-device-type"
+    values = [ "ebs" ]
+  }
+  filter {
+    name = "virtualization-type"
+    values = [ "hvm" ]
+  }
+  filter {
+    name = "architecture"
+    values = [ "x86_64" ]
   }
 }
 
 # Provision 5 t2.xlarge instances
 resource "aws_instance" "app_server" {
   count         = 5
-  ami           = data.aws_ami.latest_linux.id
+  ami           = data.aws_ami.amzlinux.id
   instance_type = "t2.xlarge"
   key_name      = "your-ssh-key-name" # Replace with your EC2 Key Pair
 
