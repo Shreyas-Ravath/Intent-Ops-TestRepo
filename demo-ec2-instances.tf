@@ -18,4 +18,5 @@ resource "aws_instance" "app_server" {
   # Optional: Assign specific tags, names, or attach a security group
   tags = {
     Name = "App-Server-${count.index + 1}" # Gives each instance a unique name
-  }}
+  }
+}
