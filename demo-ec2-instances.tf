@@ -23,7 +23,7 @@ data "aws_ami" "amzlinux" {
 resource "aws_instance" "app_server" {
   count         = 1
   ami           = data.aws_ami.amzlinux.id
-  instance_type = "t2.xlarge"
+  instance_type = "t3.small"
   key_name      = "your-ssh-key-name" # Replace with your EC2 Key Pair
 
   # Optional: Assign specific tags, names, or attach a security group
