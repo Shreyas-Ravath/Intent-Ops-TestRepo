@@ -21,7 +21,7 @@ data "aws_ami" "amzlinux" {
 
 # Provision 5 t2.xlarge instances
 resource "aws_instance" "app_server" {
-  count         = 5
+  count         = 1
   ami           = data.aws_ami.amzlinux.id
   instance_type = "t2.xlarge"
   key_name      = "your-ssh-key-name" # Replace with your EC2 Key Pair
